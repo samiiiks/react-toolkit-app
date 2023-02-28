@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-function FetchUser() {
+function UsersListTable() {
     const [user, setUser] = useState([]);
 
     const userData = async () => {
@@ -50,4 +50,4 @@ function FetchUser() {
     )
 }
 
-export default FetchUser;
+export default UsersListTable;

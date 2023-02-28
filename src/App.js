@@ -1,12 +1,11 @@
-import './App.scss';
-import FetchUser from './FetchUser';
+import './App.scss'; 
+import UserListPage from './components/pages/UserListPage';
 import './style.scss'
 
 function App() {
   return (
     <div className="App">
-      <FetchUser />
-     
+      <UserListPage />
     </div>
   );
 }
