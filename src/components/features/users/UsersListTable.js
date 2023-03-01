@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Searchbar from '../../search autocomplete/Searchbar';
 
 function UsersListTable() {
     const [user, setUser] = useState([]);
-
+    const [filter, setFilterData] = useState([]);
     const userData = async () => {
         try {
 
-            const data = axios.get('https://reqres.in/api/users?page=2')
-            .then((res) => setUser(res.data.data))
+            const data = await axios.get('https://reqres.in/api/users?page=2')
+                .then((res) => {
+                    setUser(res.data.data)
+                    setFilterData(res.data.data)
+                })
             console.log(data.data)
 
         } catch (e) {
@@ -18,10 +22,19 @@ function UsersListTable() {
     useEffect(() => {
         userData();
     }, [])
-
+  useEffect(()=>{
+    console.log(filter);
+  },[filter])
     return (
         <div className='list'>
+
             <h1>User Data</h1>
+            <Searchbar
+                user={user}
+                setFilterData={setFilterData}
+            />
+
+            <table></table>
             <table>
                 <thead>
                     <tr>
@@ -33,7 +46,7 @@ function UsersListTable() {
                 </thead>
             </table>
             {
-                user && user.map((elem, ind) => {
+                !!filter && filter.map((elem, ind) => {
                     return <div className="info" key={ind}>
                         <tr>
                             <td>{elem.id}</td>
